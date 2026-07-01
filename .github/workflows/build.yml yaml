@@ -1,0 +1,29 @@
+name: Build StartKit Plugin
+
+on:
+  push:
+    branches: [ "main" ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Repo letöltése
+        uses: actions/checkout@v4
+
+      - name: Java 17 telepítése
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+          cache: maven
+
+      - name: Build Maven-nel
+        run: mvn -B clean package
+
+      - name: Kész .jar feltöltése
+        uses: actions/upload-artifact@v4
+        with:
+          name: StartKit-jar
+          path: target/StartKit.jar
