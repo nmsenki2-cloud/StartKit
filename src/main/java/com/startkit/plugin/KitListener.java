@@ -37,14 +37,13 @@ public class KitListener implements Listener {
         player.getInventory().clear();
 
         player.getInventory().addItem(
-                new ItemStack(Material.WOODEN_SWORD, 1),
-                new ItemStack(Material.BREAD, 8),
-                new ItemStack(Material.WOODEN_PICKAXE, 1),
-                new ItemStack(Material.WOODEN_AXE, 1),
-                new ItemStack(Material.LEATHER_HELMET, 1),
-                new ItemStack(Material.LEATHER_CHESTPLATE, 1),
-                new ItemStack(Material.LEATHER_LEGGINGS, 1),
-                new ItemStack(Material.LEATHER_BOOTS, 1)
+                new ItemStack(Material.STONE_SWORD, 1),
+                new ItemStack(Material.STONE_PICKAXE, 1),
+                new ItemStack(Material.STONE_AXE, 1),
+                new ItemStack(Material.CHAINMAIL_HELMET, 1),
+                new ItemStack(Material.CHAINMAIL_CHESTPLATE, 1),
+                new ItemStack(Material.CHAINMAIL_LEGGINGS, 1),
+                new ItemStack(Material.CHAINMAIL_BOOTS, 1)
         );
 
         player.sendMessage("§aMegkaptad a kezdő kitet!");
