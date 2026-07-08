@@ -3,4 +3,4 @@ version: 1.0.0
 main: com.startkit.plugin.StartKitPlugin
 api-version: 1.20
 author: Te
-description: Kezdő kitet ad a játékosoknak belépéskor és halál/respawn után.
+description: Kezdő kitet ad a játékosnak első belépéskor, majd minden halál/respawn után.
