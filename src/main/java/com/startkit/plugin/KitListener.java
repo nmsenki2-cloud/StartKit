@@ -1,43 +1,52 @@
 package com.startkit.plugin;
 
-import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.entity.PlayerRespawnEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
-import org.bukkit.event.player.PlayerRespawnEvent;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.PlayerInventory;
-import org.bukkit.scheduler.BukkitRunnable;
+import org.bukkit.Material;
 
 public class KitListener implements Listener {
 
-    @EventHandler
-    public void onJoin(PlayerJoinEvent event) {
-        giveKit(event.getPlayer());
+    private final StartKitPlugin plugin;
+
+    public KitListener(StartKitPlugin plugin) {
+        this.plugin = plugin;
     }
 
+    // Csak akkor kap kitet, ha ELŐSZÖR lép fel a szerverre
     @EventHandler
-    public void onRespawn(PlayerRespawnEvent event) {
+    public void onPlayerJoin(PlayerJoinEvent event) {
         Player player = event.getPlayer();
-        new BukkitRunnable() {
-            @Override
-            public void run() {
-                giveKit(player);
-            }
-        }.runTaskLater(StartKitPlugin.getInstance(), 1L);
+
+        if (!player.hasPlayedBefore()) {
+            giveKit(player);
+        }
+    }
+
+    // Halál/respawn után mindig kap kitet
+    @EventHandler
+    public void onPlayerRespawn(PlayerRespawnEvent event) {
+        Player player = event.getPlayer();
+        giveKit(player);
     }
 
     private void giveKit(Player player) {
-        PlayerInventory inv = player.getInventory();
+        player.getInventory().clear();
 
-        inv.setHelmet(new ItemStack(Material.CHAINMAIL_HELMET));
-        inv.setChestplate(new ItemStack(Material.CHAINMAIL_CHESTPLATE));
-        inv.setLeggings(new ItemStack(Material.CHAINMAIL_LEGGINGS));
-        inv.setBoots(new ItemStack(Material.CHAINMAIL_BOOTS));
+        player.getInventory().addItem(
+                new ItemStack(Material.WOODEN_SWORD, 1),
+                new ItemStack(Material.BREAD, 8),
+                new ItemStack(Material.WOODEN_PICKAXE, 1),
+                new ItemStack(Material.WOODEN_AXE, 1),
+                new ItemStack(Material.LEATHER_HELMET, 1),
+                new ItemStack(Material.LEATHER_CHESTPLATE, 1),
+                new ItemStack(Material.LEATHER_LEGGINGS, 1),
+                new ItemStack(Material.LEATHER_BOOTS, 1)
+        );
 
-        inv.addItem(new ItemStack(Material.STONE_SWORD));
-        inv.addItem(new ItemStack(Material.STONE_PICKAXE));
-        inv.addItem(new ItemStack(Material.STONE_AXE));
+        player.sendMessage("§aMegkaptad a kezdő kitet!");
     }
 }
