@@ -44,5 +44,6 @@ public class KitListener implements Listener {
                 new ItemStack(Material.CHAINMAIL_CHESTPLATE, 1),
                 new ItemStack(Material.CHAINMAIL_LEGGINGS, 1),
                 new ItemStack(Material.CHAINMAIL_BOOTS, 1)
+        );
     }
 }
