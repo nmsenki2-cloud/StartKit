@@ -4,21 +4,14 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 public class StartKitPlugin extends JavaPlugin {
 
-    private static StartKitPlugin instance;
-
     @Override
     public void onEnable() {
-        instance = this;
-        getServer().getPluginManager().registerEvents(new KitListener(), this);
-        getLogger().info("StartKit plugin betöltve!");
-    }
-
-    public static StartKitPlugin getInstance() {
-        return instance;
+        getServer().getPluginManager().registerEvents(new KitListener(this), this);
+        getLogger().info("StartKit plugin bekapcsolva!");
     }
 
     @Override
     public void onDisable() {
-        getLogger().info("StartKit plugin leállítva.");
+        getLogger().info("StartKit plugin kikapcsolva!");
     }
 }
