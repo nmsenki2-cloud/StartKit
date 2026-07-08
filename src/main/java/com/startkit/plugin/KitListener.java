@@ -39,7 +39,5 @@ public class KitListener implements Listener {
         inv.addItem(new ItemStack(Material.STONE_SWORD));
         inv.addItem(new ItemStack(Material.STONE_PICKAXE));
         inv.addItem(new ItemStack(Material.STONE_AXE));
-
-        player.sendMessage("§aMegkaptad a kezdő kitet!");
     }
 }
